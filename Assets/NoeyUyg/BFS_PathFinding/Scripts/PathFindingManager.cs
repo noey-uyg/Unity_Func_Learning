@@ -17,6 +17,8 @@ public class PathFindingManager : MonoBehaviour
     private int x;
     private int y;
 
+    private WaitForSeconds _visualizingWaitTime = new WaitForSeconds(0.1f);
+
     public void SetGridSize(int x, int y)
     {
         this.x = x;
@@ -160,11 +162,17 @@ public class PathFindingManager : MonoBehaviour
         path.Add(start);
         path.Reverse();
 
+        StartCoroutine(IEPathVisualization(path));
+    }
+
+    IEnumerator IEPathVisualization(List<Pos> path)
+    {
         int point = 0;
-        // 경로를 시각적으로 표시
-        foreach (var pos in path)
+        while (point < path.Count)
         {
-            var raw = _rawList.Find(x => x.Pos.Equals(pos));
+            yield return _visualizingWaitTime;
+
+            var raw = _rawList.Find(x => x.Pos.Equals(path[point]));
 
             if (raw.Pos.roadType != RoadType.Start && raw.Pos.roadType != RoadType.End)
             {
