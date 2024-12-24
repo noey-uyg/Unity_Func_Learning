@@ -32,7 +32,7 @@ public class CreateImage : MonoBehaviour
             for (int j = 0; j < y; j++)
             {
                 // 사각형 생성
-                RawImageScript square = Instantiate(_rawImage);
+                RawImageScript square = RawImagePool.Instance.GetRawImage();
                 square.SetRectSize(squareWidth, squareHeight, i, j);
                 square.transform.SetParent(_parent);
                 square.transform.localScale = Vector3.one;
