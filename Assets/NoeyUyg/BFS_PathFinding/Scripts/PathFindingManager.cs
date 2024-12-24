@@ -9,6 +9,7 @@ public class PathFindingManager : MonoBehaviour
     private Color _endColor = Color.red;
     private Color _wallColor = Color.gray;
 
+    private GameObject _buttonObj;
     private List<RawImageScript> _rawList = new List<RawImageScript>();
 
     private Queue<Pos> queue = new Queue<Pos>();
@@ -28,6 +29,38 @@ public class PathFindingManager : MonoBehaviour
     public void AddList(RawImageScript rawImageScript)
     {
         _rawList.Add(rawImageScript);
+    }
+
+    public void Init()
+    {
+        // 시작 버튼 비활성화
+        if(_buttonObj != null)
+        {
+            _buttonObj.SetActive(false);
+        }
+        // fail 글자 비활성화
+        _fail.SetActive(false);
+
+        // 길 초기화
+        for(int i=0;i< _rawList.Count; i++)
+        {
+            _rawList[i].SetRoadType(RoadType.None);
+            _rawList[i].SetText(string.Empty);
+            _rawList[i].SetColor(Color.white);
+        }
+    }
+
+    public void PathFindingStart(GameObject button)
+    {
+        _buttonObj = button;
+        // 초기화
+        Init();
+        // 길 타입 지정하기
+        SetRoadType();
+
+        // 길찾기 시작
+        BFS(_rawList.Find(x => x.Pos.roadType == RoadType.Start).Pos,
+            _rawList.Find(x => x.Pos.roadType == RoadType.End).Pos);
     }
 
     // 길 타입 지정
@@ -73,18 +106,6 @@ public class PathFindingManager : MonoBehaviour
         _rawList[endIDX].SetText("End");
     }
 
-    public void PathFindingStart(GameObject button)
-    {
-        // 시작 버튼 비활성화
-        button.SetActive(false);
-        // 길 타입 지정하기
-        SetRoadType();
-
-        // 길찾기 시작
-        BFS(_rawList.Find(x => x.Pos.roadType == RoadType.Start).Pos,
-            _rawList.Find(x => x.Pos.roadType == RoadType.End).Pos);
-    }
-
     private void BFS(Pos startPos, Pos endPos)
     {
         queue.Clear();
@@ -118,6 +139,7 @@ public class PathFindingManager : MonoBehaviour
 
         Debug.Log("길찾기 실패");
         _fail.SetActive(true);
+        _buttonObj.SetActive(true);
     }
 
     // 상하좌우 근접 좌표
@@ -181,5 +203,6 @@ public class PathFindingManager : MonoBehaviour
             }
             point++;
         }
+        _buttonObj.SetActive(true);
     }
 }
