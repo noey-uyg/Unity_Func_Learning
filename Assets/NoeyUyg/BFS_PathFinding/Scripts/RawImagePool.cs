@@ -52,7 +52,7 @@ public class RawImagePool : Sigleton<RawImagePool>
         return raw;
     }
 
-    public void ReleaseObject(RawImageScript raw)
+    public void ReleaseRawImage(RawImageScript raw)
     {
         _rawImagePool.Release(raw);
     }
