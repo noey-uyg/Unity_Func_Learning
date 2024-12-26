@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// ΩÃ±€≈Ê
 /// </summary>
-public class Sigleton<T> : MonoBehaviour where T : MonoBehaviour
+public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T _instance;
     public static T Instance => _instance;

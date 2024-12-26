@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class WindowPool : Sigleton<WindowPool>
+public class WindowPool : Singleton<WindowPool>
 {
     [SerializeField] private Window _windowPrefab;
     private ObjectPool<Window> _windowPool;

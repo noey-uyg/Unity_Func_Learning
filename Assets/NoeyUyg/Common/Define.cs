@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Define {}
 
+
+#region BFS_PathFinding
 public class RectSize
 {
     public float sizeX;
@@ -43,3 +45,32 @@ public class Pos
         return (X, Y).GetHashCode();
     }
 }
+
+public enum RoadType
+{
+    None = 0,
+    Start,
+    End,
+    Wall,
+
+    LastInstance
+}
+#endregion
+
+#region Move_Learning
+public enum TargetObject
+{
+    target1,
+    target2,
+
+    LastInstance
+}
+
+public enum MoveMode
+{
+    Mouse,
+    Keyboard,
+
+    LastInstance
+}
+#endregion

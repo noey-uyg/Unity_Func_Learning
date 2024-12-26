@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class RawImagePool : Sigleton<RawImagePool>
+public class RawImagePool : Singleton<RawImagePool>
 {
     [SerializeField] private RawImageScript _rawImagePrefab;
     private ObjectPool<RawImageScript> _rawImagePool;

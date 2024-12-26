@@ -4,16 +4,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum RoadType
-{
-    None = 0,
-    Start,
-    End,
-    Wall,
-
-    LastInstance
-}
-
 public class RawImageScript : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _text;
