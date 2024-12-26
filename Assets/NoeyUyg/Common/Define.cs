@@ -74,3 +74,25 @@ public enum MoveMode
     LastInstance
 }
 #endregion
+
+#region Inventory_Learning
+public enum ItemType
+{
+    Head,
+    Body,
+    Hand,
+    Weapon,
+    RFoot,
+    LFoot,
+
+    LastInstance
+}
+
+public class ItemAttribute
+{
+    public ItemType itemType;
+    public int ability;
+    public bool use;
+}
+
+#endregion
