@@ -96,3 +96,24 @@ public class ItemAttribute
 }
 
 #endregion
+
+#region DesignPattern
+
+#region Factory
+
+public enum FactoryUnitType
+{
+    SmallRed,
+    SmallBlue,
+    SmallGreen,
+    BigRed,
+    BigBlue,
+    BigGreen,
+
+    LastInstance
+}
+
+
+#endregion
+
+#endregion
