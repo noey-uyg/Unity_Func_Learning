@@ -187,6 +187,7 @@ public class PathFindingManager : MonoBehaviour
         StartCoroutine(IEPathVisualization(path));
     }
 
+    // 경로 시각화 딜레이
     IEnumerator IEPathVisualization(List<Pos> path)
     {
         int point = 0;
