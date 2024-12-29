@@ -8,20 +8,20 @@ public class BigUnit : UnitFactory
     [SerializeField] private BigGreen _smallGreen;
     [SerializeField] private BigRed _smallRed;
 
-    public override Unit Create(FactoryUnitType unitType)
+    public override Unit Create(FactoryUnitSubType unitType)
     {
         Unit unit = null;
         switch (unitType)
         {
-            case FactoryUnitType.BigBlue:
+            case FactoryUnitSubType.BigBlue:
                 unit = UnitPool.Instance.GetBigBlue();
                 unit.Init();
                 break;
-            case FactoryUnitType.BigRed:
+            case FactoryUnitSubType.BigRed:
                 unit = UnitPool.Instance.GetBigRed();
                 unit.Init();
                 break;
-            case FactoryUnitType.BigGreen:
+            case FactoryUnitSubType.BigGreen:
                 unit = UnitPool.Instance.GetBigGreen();
                 unit.Init();
                 break;

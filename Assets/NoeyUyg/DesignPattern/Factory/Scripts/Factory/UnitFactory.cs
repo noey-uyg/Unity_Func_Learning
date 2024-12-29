@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class UnitFactory : MonoBehaviour
 {
-    public abstract Unit Create(FactoryUnitType unitType);
+    public abstract Unit Create(FactoryUnitSubType unitType);
 }

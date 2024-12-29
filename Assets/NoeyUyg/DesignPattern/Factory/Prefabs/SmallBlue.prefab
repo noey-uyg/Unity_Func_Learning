@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7221050501931117197}
   - component: {fileID: 6682972044356797783}
   - component: {fileID: 5564560388378462168}
+  - component: {fileID: 4445089234045027199}
+  - component: {fileID: 128414079411058720}
   m_Layer: 0
   m_Name: SmallBlue
   m_TagString: Untagged
@@ -97,3 +99,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804b08bad83469f47a4dab22aec2fdfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &4445089234045027199
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3281208938648586418}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &128414079411058720
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3281208938648586418}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

@@ -100,8 +100,15 @@ public class ItemAttribute
 #region DesignPattern
 
 #region Factory
+public enum FactoryUnitMainType
+{
+    Small,
+    Big,
 
-public enum FactoryUnitType
+    LastInstance
+}
+
+public enum FactoryUnitSubType
 {
     SmallRed,
     SmallBlue,
@@ -112,7 +119,6 @@ public enum FactoryUnitType
 
     LastInstance
 }
-
 
 #endregion
 
