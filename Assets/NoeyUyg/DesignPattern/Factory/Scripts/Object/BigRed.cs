@@ -10,7 +10,7 @@ public class BigRed : Unit
         _hp = 20;
         _range = 5;
         _speed = 1;
-        _damage = 6;
+        _damage = 2;
         _unitMainType = FactoryUnitMainType.Big;
         _unitSubType = FactoryUnitSubType.BigRed;
     }

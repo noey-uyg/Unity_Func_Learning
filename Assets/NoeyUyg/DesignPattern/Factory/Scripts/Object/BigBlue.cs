@@ -10,7 +10,7 @@ public class BigBlue : Unit
         _hp = 40;
         _range = 1;
         _speed = 1;
-        _damage = 2;
+        _damage = 6;
         _unitMainType = FactoryUnitMainType.Big;
         _unitSubType = FactoryUnitSubType.BigBlue;
     }

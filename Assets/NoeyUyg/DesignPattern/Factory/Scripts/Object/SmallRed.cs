@@ -10,7 +10,7 @@ public class SmallRed : Unit
         _hp = 10;
         _range = 5;
         _speed = 1;
-        _damage = 3;
+        _damage = 1;
         _unitMainType = FactoryUnitMainType.Small;
         _unitSubType = FactoryUnitSubType.SmallRed;
     }

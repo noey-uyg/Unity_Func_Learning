@@ -18,7 +18,7 @@ public class UnitCreate : Singleton<UnitCreate>
 
     private int _inputCreateNumber = 0;
     private float _createDelay = 2.5f;
-    private float _trackingDelay = 0.25f;
+    private float _trackingDelay = 0.01f;
 
     private void Start()
     {
@@ -47,6 +47,7 @@ public class UnitCreate : Singleton<UnitCreate>
 
         if(unit != null)
         {
+            unit.SetState(FactoryUnitState.live);
             StartCoroutine(TrackEnemies(unit));
         }
     }
@@ -71,6 +72,19 @@ public class UnitCreate : Singleton<UnitCreate>
 
         if(_inputCreateNumber > 0)
         {
+            for(int i=0;i< _smallUnitList.Count; i++)
+            {
+                _smallUnitFactory.Release(_smallUnitList[i]);
+            }
+
+            for(int i = 0; i < _bigUnitList.Count; i++)
+            {
+                _bigUnitFactory.Release(_bigUnitList[i]);
+            }
+
+            _smallUnitList.Clear();
+            _bigUnitList.Clear();
+
             StartCoroutine(IECreateUnit(FactoryUnitMainType.Big, _inputCreateNumber));
             StartCoroutine(IECreateUnit(FactoryUnitMainType.Small, _inputCreateNumber * 2));
         }
@@ -89,7 +103,7 @@ public class UnitCreate : Singleton<UnitCreate>
             int subTypeNum = Random.Range(0, (int)FactoryUnitSubType.BigRed);
             subTypeNum = mainType == FactoryUnitMainType.Big ? subTypeNum + 3 : subTypeNum;
 
-            CreateUnit(mainType, (FactoryUnitSubType)subTypeNum, spawnPoint);
+            CreateUnit(mainType, (FactoryUnitSubType)subTypeNum, new Vector2(spawnPoint.x, spawnPoint.y +(Random.Range(-2,3))));
 
             yield return waitForSeconds;
         }

@@ -8,6 +8,7 @@ public class Unit : MonoBehaviour
     private Transform _thisTransform;
     private Rigidbody2D _thisRigidbody;
     private Coroutine _attackCoroutine;
+    private FactoryUnitState _unitState;
 
     protected int _hp;
     protected int _range;
@@ -29,7 +30,7 @@ public class Unit : MonoBehaviour
     // 가까운 적 유닛 찾기
     public void FindNearbyEnemies(List<Unit> unitList)
     {
-        if (unitList == null || unitList.Count == 0)
+        if (unitList == null || unitList.Count == 0 || !this.gameObject.activeInHierarchy || _unitState == FactoryUnitState.Die)
             return;
 
         Unit closestUnit = null;
@@ -37,6 +38,9 @@ public class Unit : MonoBehaviour
 
         for (int i = 0; i < unitList.Count; i++){
             Unit curUnit = unitList[i];
+
+            if (!curUnit.gameObject.activeInHierarchy || curUnit.GetState() == FactoryUnitState.Die)
+                continue;
 
             if (curUnit.UnitMainType != _unitMainType)
             {
@@ -58,11 +62,15 @@ public class Unit : MonoBehaviour
 
     IEnumerator MoveToTarget(Unit targetUnit)
     {
-        while (targetUnit != null && targetUnit.gameObject.activeInHierarchy)
+        if(_attackCoroutine != null)
+            StopCoroutine(_attackCoroutine);
+
+        _attackCoroutine = null;
+        while (targetUnit != null && targetUnit.gameObject.activeInHierarchy && targetUnit.GetState() == FactoryUnitState.live)
         {
             Vector2 targetPosition = targetUnit.ThisTransform.position;
             Vector2 direction = (targetPosition - (Vector2)_thisTransform.position).normalized;
-            Vector2 targetPositionWithRange = targetPosition - direction * _range; // range 만큼 뒤로 물러남
+            Vector2 targetPositionWithRange = targetPosition - direction; // range 만큼 뒤로 물러남
 
             float distanceToTarget = Vector2.Distance(_thisTransform.position, targetUnit.ThisTransform.position);
 
@@ -111,7 +119,23 @@ public class Unit : MonoBehaviour
         if(_hp <= 0)
         {
             Die();
+            SetState(FactoryUnitState.Die);
         }
+    }
+
+    public void SetState(FactoryUnitState state)
+    {
+        _unitState = state;
+    }
+
+    public FactoryUnitState GetState()
+    {
+        return _unitState;
+    }
+
+    public FactoryUnitSubType GetUnitSubType()
+    {
+        return _unitSubType;
     }
 
     // 죽을 때 각자 처리

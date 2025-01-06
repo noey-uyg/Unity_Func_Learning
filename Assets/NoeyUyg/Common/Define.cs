@@ -120,6 +120,14 @@ public enum FactoryUnitSubType
     LastInstance
 }
 
+public enum FactoryUnitState
+{
+    live,
+    Die,
+
+    LastInstance
+}
+
 #endregion
 
 #endregion

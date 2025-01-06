@@ -29,4 +29,22 @@ public class BigUnit : UnitFactory
         unit.transform.SetParent(transform);
         return unit;
     }
+
+    public override void Release(Unit unit)
+    {
+        var unitType = unit.GetUnitSubType();
+
+        switch (unitType)
+        {
+            case FactoryUnitSubType.BigBlue:
+                UnitPool.Instance.ReleaseBigBlue((BigBlue)unit);
+                break;
+            case FactoryUnitSubType.BigRed:
+                UnitPool.Instance.ReleaseBigRed((BigRed)unit);
+                break;
+            case FactoryUnitSubType.BigGreen:
+                UnitPool.Instance.ReleaseBigGreen((BigGreen)unit);
+                break;
+        }
+    }
 }

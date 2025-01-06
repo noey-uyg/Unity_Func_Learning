@@ -5,4 +5,5 @@ using UnityEngine;
 public abstract class UnitFactory : MonoBehaviour
 {
     public abstract Unit Create(FactoryUnitSubType unitType);
+    public abstract void Release(Unit unit);
 }

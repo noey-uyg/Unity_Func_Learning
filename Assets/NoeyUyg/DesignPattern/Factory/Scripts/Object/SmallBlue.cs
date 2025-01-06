@@ -10,7 +10,7 @@ public class SmallBlue : Unit
         _hp = 20;
         _range = 1;
         _speed = 1;
-        _damage = 1;
+        _damage = 3;
         _unitMainType = FactoryUnitMainType.Small;
         _unitSubType = FactoryUnitSubType.SmallBlue;
     }

@@ -29,4 +29,22 @@ public class SmallUnit : UnitFactory
         unit.transform.SetParent(transform);
         return unit;
     }
+
+    public override void Release(Unit unit)
+    {
+        var unitType = unit.GetUnitSubType();
+
+        switch (unitType)
+        {
+            case FactoryUnitSubType.SmallBlue:
+                UnitPool.Instance.ReleaseSmallBlue((SmallBlue)unit);
+                break;
+            case FactoryUnitSubType.SmallRed:
+                UnitPool.Instance.ReleaseSmallRed((SmallRed)unit);
+                break;
+            case FactoryUnitSubType.SmallGreen:
+                UnitPool.Instance.ReleaseSmallGreen((SmallGreen)unit);
+                break;
+        }
+    }
 }
