@@ -148,6 +148,13 @@ public enum Command_KeyAction
     Undo,
 }
 
+public enum Command_Action
+{
+    Excute,
+    Undo,
+
+}
+
 #endregion
 
 #endregion

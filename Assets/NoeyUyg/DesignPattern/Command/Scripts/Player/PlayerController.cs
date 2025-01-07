@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Player _player;
+    [SerializeField] private Toggle _undoAddToggle;
 
     private ICommand _playerMoveUpCommand;
     private ICommand _playerMoveDownCommand;
@@ -13,7 +16,8 @@ public class PlayerController : MonoBehaviour
 
     private float _gameTime = 0f;
     private float _replayTime = 0f;
-    private SortedList<float, ICommand> _replayCommand = new SortedList<float, ICommand>();
+    private SortedList<float, KeyValuePair<Command_Action,ICommand>> _replayCommand = new SortedList<float, KeyValuePair<Command_Action, ICommand>>();
+    private Stack<ICommand> _undoCommand = new Stack<ICommand>();
 
     private bool _isReplay;
 
@@ -34,27 +38,26 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeySettingManager.Instance.GetKeyCode(Command_KeyAction.MoveUP)))
             {
-                ExecuteCommand(_playerMoveUpCommand);
+                ExecuteCommand(Command_Action.Excute, _playerMoveUpCommand);
             }
             else if (Input.GetKeyDown(KeySettingManager.Instance.GetKeyCode(Command_KeyAction.MoveDown)))
             {
-                ExecuteCommand(_playerMoveDownCommand);
+                ExecuteCommand(Command_Action.Excute, _playerMoveDownCommand);
             }
             else if (Input.GetKeyDown(KeySettingManager.Instance.GetKeyCode(Command_KeyAction.MoveLeft)))
             {
-                ExecuteCommand(_playerMoveLeftCommand);
+                ExecuteCommand(Command_Action.Excute, _playerMoveLeftCommand);
             }
             else if (Input.GetKeyDown(KeySettingManager.Instance.GetKeyCode(Command_KeyAction.MoveRight)))
             {
-                ExecuteCommand(_playerMoveRightCommand);
+                ExecuteCommand(Command_Action.Excute, _playerMoveRightCommand);
             }
             else if (Input.GetKeyDown(KeySettingManager.Instance.GetKeyCode(Command_KeyAction.Undo)))
             {
-                if (_replayCommand.Count > 0)
+                if(_undoCommand.Count > 0)
                 {
-                    int lastIndex = _replayCommand.Count - 1;
-                    _replayCommand.Values[lastIndex].Undo();
-                    _replayCommand.RemoveAt(lastIndex);
+                    var undoCommand = _undoCommand.Pop();
+                    ExecuteCommand(Command_Action.Undo, undoCommand);
                 }
             }
         }
@@ -71,13 +74,27 @@ public class PlayerController : MonoBehaviour
             {
                 if(Mathf.Approximately(_replayTime, _replayCommand.Keys[0]))
                 {
-                    _replayCommand.Values[0].Execute();
+                    switch (_replayCommand.Values[0].Key)
+                    {
+                        case Command_Action.Excute:
+                            {
+                                _replayCommand.Values[0].Value.Execute();
+                            }
+                            break;
+                        case Command_Action.Undo:
+                            {
+                                _replayCommand.Values[0].Value.Undo();
+                            }
+                            break;
+                    }
+
                     _replayCommand.RemoveAt(0);
                 }
             }
             else
             {
                 _player.SetStartPosition();
+                Debug.Log("Replay Finish");
                 _isReplay = false;
             }
         }
@@ -87,16 +104,34 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void ExecuteCommand(ICommand command)
+    private void ExecuteCommand(Command_Action action, ICommand command)
     {
-        command.Execute();
-        _replayCommand.Add(_gameTime, command);
+        switch (action)
+        {
+            case Command_Action.Undo:
+                {
+                    command.Undo();
+                }
+                break;
+            case Command_Action.Excute:
+                {
+                    command.Execute();
+                    _undoCommand.Push(command);
+                }
+                break;
+        }
+
+        if (action == Command_Action.Undo && !_undoAddToggle.isOn)
+            return;
+
+        _replayCommand.Add(_gameTime, new KeyValuePair<Command_Action,ICommand>(action,command));
     }
 
     public void ReplayStart()
     {
         _replayTime = 0f;
         _player.ResetPosition();
+        _undoCommand.Clear();
         _isReplay = true;
     }
 }
