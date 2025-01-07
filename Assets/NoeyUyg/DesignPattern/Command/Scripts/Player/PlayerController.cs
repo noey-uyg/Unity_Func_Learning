@@ -27,7 +27,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (!KeySettingManager.Instance.ChangeKey || !_isReplay)
+        if (_isReplay)
+            return;
+
+        if (!KeySettingManager.Instance.ChangeKey)
         {
             if (Input.GetKeyDown(KeySettingManager.Instance.GetKeyCode(Command_KeyAction.MoveUP)))
             {

@@ -74,7 +74,6 @@ public class KeySettingManager : Singleton<KeySettingManager>
                     _keyList[i].Refresh();
                 }
                 _currentkey = null;
-                _changeKey = false;
             }
         }
     }
@@ -83,5 +82,10 @@ public class KeySettingManager : Singleton<KeySettingManager>
     {
         _currentkey = currentkey;
         _changeKey = true;
+    }
+
+    public void Save()
+    {
+        _changeKey = false;
     }
 }
