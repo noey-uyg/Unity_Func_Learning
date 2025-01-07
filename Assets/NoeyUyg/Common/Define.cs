@@ -24,6 +24,12 @@ public class Pos
     public int Y;
     public RoadType roadType;
 
+    public int gCost;
+    public int hCost;
+    public Pos parent;
+
+    public int fCost { get { return gCost + hCost; } }
+
     public Pos(int X, int Y)
     {
         this.X = X;
