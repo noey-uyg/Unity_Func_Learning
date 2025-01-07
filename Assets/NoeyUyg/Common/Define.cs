@@ -130,4 +130,16 @@ public enum FactoryUnitState
 
 #endregion
 
+#region Command
+
+public enum Command_KeyAction
+{
+    MoveUP,
+    MoveDown,
+    MoveLeft,
+    MoveRight,     
+}
+
+#endregion
+
 #endregion
