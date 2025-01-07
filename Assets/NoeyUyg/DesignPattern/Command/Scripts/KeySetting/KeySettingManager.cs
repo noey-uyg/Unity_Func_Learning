@@ -22,6 +22,8 @@ public class KeySettingManager : Singleton<KeySettingManager>
         key.Add(Command_KeyAction.MoveDown, KeyCode.S);
         key.Add(Command_KeyAction.MoveLeft, KeyCode.A);
         key.Add(Command_KeyAction.MoveRight, KeyCode.D);
+
+        key.Add(Command_KeyAction.Undo, KeyCode.Z);
     }
 
     public KeyCode GetKeyCode(Command_KeyAction keyAction)

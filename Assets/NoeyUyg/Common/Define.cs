@@ -137,7 +137,9 @@ public enum Command_KeyAction
     MoveUP,
     MoveDown,
     MoveLeft,
-    MoveRight,     
+    MoveRight,   
+    
+    Undo,
 }
 
 #endregion

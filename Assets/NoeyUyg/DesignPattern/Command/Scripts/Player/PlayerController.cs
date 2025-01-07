@@ -48,6 +48,15 @@ public class PlayerController : MonoBehaviour
             {
                 ExecuteCommand(_playerMoveRightCommand);
             }
+            else if (Input.GetKeyDown(KeySettingManager.Instance.GetKeyCode(Command_KeyAction.Undo)))
+            {
+                if (_replayCommand.Count > 0)
+                {
+                    int lastIndex = _replayCommand.Count - 1;
+                    _replayCommand.Values[lastIndex].Undo();
+                    _replayCommand.RemoveAt(lastIndex);
+                }
+            }
         }
     }
 

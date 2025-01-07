@@ -17,6 +17,6 @@ public class PlayerMoveLeftCommand : ICommand
 
     public void Undo()
     {
-        _player.MoveUp();
+        _player.MoveRight();
     }
 }
