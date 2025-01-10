@@ -9,7 +9,7 @@ public class PathFindingManager : MonoBehaviour
     [SerializeField] GameObject _fail;
     [SerializeField] GameObject _toggleGroup;
     [SerializeField] Toggle _bfsToggle;
-    [SerializeField] bool _test;
+    [SerializeField] Toggle _saveMapToggle;
 
     private Color _startColor = Color.green;
     private Color _endColor = Color.red;
@@ -23,6 +23,7 @@ public class PathFindingManager : MonoBehaviour
     private int y;
 
     private WaitForSeconds _visualizingWaitTime = new WaitForSeconds(0.1f);
+    private WaitForSeconds _pathFindingWaitTime = new WaitForSeconds(0.01f);
     Stopwatch stopwatch = new Stopwatch();
 
     public void SetGridSize(int x, int y)
@@ -38,21 +39,13 @@ public class PathFindingManager : MonoBehaviour
 
     public void Init()
     {
-        // 시작 버튼 비활성화
-        if(_buttonObj != null)
-        {
-            _buttonObj.SetActive(false);
-        }
-        // fail 글자 비활성화
-        _fail.SetActive(false);
-
-        // 토글 비활성화
-        _toggleGroup.SetActive(false);
+        // 버튼 비활성화
+        UIActive(false, true);
 
         // 길 초기화
         for (int i=0;i< _rawList.Count; i++)
         {
-            if (_test)
+            if (_saveMapToggle.isOn)
             {
                 if (_rawList[i].Pos.roadType != RoadType.Start && _rawList[i].Pos.roadType != RoadType.End && _rawList[i].Pos.roadType != RoadType.Wall)
                 {
@@ -73,12 +66,14 @@ public class PathFindingManager : MonoBehaviour
     private bool _init;
     public void PathFindingStart(GameObject button)
     {
+        stopwatch.Reset();
         stopwatch.Start();
-        _buttonObj = button;
+        if(_buttonObj == null)
+            _buttonObj = button;
         // 초기화
         Init();
         // 길 타입 지정하기
-        if (_test)
+        if (_saveMapToggle.isOn)
         {
             if (!_init)
                 SetRoadType();
@@ -91,15 +86,14 @@ public class PathFindingManager : MonoBehaviour
 
         if (_bfsToggle.isOn)
         {
-            BFS(_rawList.Find(x => x.Pos.roadType == RoadType.Start).Pos,
-            _rawList.Find(x => x.Pos.roadType == RoadType.End).Pos);
+            StartCoroutine(BFS(_rawList.Find(x => x.Pos.roadType == RoadType.Start).Pos,
+            _rawList.Find(x => x.Pos.roadType == RoadType.End).Pos));
         }
         else
         {
-            Astar(_rawList.Find(x => x.Pos.roadType == RoadType.Start).Pos,
-            _rawList.Find(x => x.Pos.roadType == RoadType.End).Pos);
+            StartCoroutine(Astar(_rawList.Find(x => x.Pos.roadType == RoadType.Start).Pos,
+            _rawList.Find(x => x.Pos.roadType == RoadType.End).Pos));
         }
-        stopwatch.Reset();
     }
 
     // 길 타입 지정
@@ -146,7 +140,7 @@ public class PathFindingManager : MonoBehaviour
         _rawList[endIDX].SetText("End");
     }
 
-    private void Astar(Pos startPos, Pos endPos)
+    private IEnumerator Astar(Pos startPos, Pos endPos)
     {
         List<Pos> openSet = new List<Pos>();
         HashSet<Pos> closedSet = new HashSet<Pos>();
@@ -174,7 +168,7 @@ public class PathFindingManager : MonoBehaviour
                 stopwatch.Stop();
                 UnityEngine.Debug.Log($"길찾기 성공 {stopwatch.ElapsedMilliseconds}ms");
                 ReconstructPath(startPos, cur);
-                return;
+                yield break;
             }
 
             foreach(var neighbor in GetNeighborsWithEightDirection(cur))
@@ -203,16 +197,15 @@ public class PathFindingManager : MonoBehaviour
                     }
                 }
             }
+            yield return _pathFindingWaitTime;
         }
 
         stopwatch.Stop();
-        UnityEngine.Debug.Log($"길찾기 실패 {stopwatch.ElapsedMilliseconds}ms");
-        _fail.SetActive(true);
-        _buttonObj.SetActive(true);
-        _toggleGroup.SetActive(true);
+        UnityEngine.Debug.Log($"길찾기 실패 {stopwatch.ElapsedMilliseconds}ms");        
+        UIActive(true, true);
     }
 
-    private void BFS(Pos startPos, Pos endPos)
+    private IEnumerator BFS(Pos startPos, Pos endPos)
     {
         Queue<Pos> queue = new Queue<Pos>();
         HashSet<Pos> visit = new HashSet<Pos>();
@@ -233,7 +226,7 @@ public class PathFindingManager : MonoBehaviour
                 stopwatch.Stop();
                 UnityEngine.Debug.Log($"길찾기 성공 {stopwatch.ElapsedMilliseconds}ms");
                 ReconstructPath(startPos, endPos, parentMap);
-                return;
+                yield break;
             }
 
             foreach (var neighbor in GetNeighborsWithFourDirection(cur))
@@ -245,13 +238,13 @@ public class PathFindingManager : MonoBehaviour
                     parentMap[neighbor] = cur; // 현재 노드의 부모를 기록
                 }
             }
+
+            yield return _pathFindingWaitTime;
         }
 
         stopwatch.Stop();
         UnityEngine.Debug.Log($"길찾기 실패 {stopwatch.ElapsedMilliseconds}ms");
-        _fail.SetActive(true);
-        _buttonObj.SetActive(true);
-        _toggleGroup.SetActive(true);
+        UIActive(true, true);
     }
 
     // 상하좌우 근접 좌표
@@ -348,7 +341,18 @@ public class PathFindingManager : MonoBehaviour
             }
             point++;
         }
-        _buttonObj.SetActive(true);
-        _toggleGroup.SetActive(true);
+        UIActive(true, false);
+    }
+
+    private void UIActive(bool bValue, bool fail)
+    {
+        if(fail)
+            _fail.SetActive(bValue);
+
+        if(_buttonObj != null)
+            _buttonObj.SetActive(bValue);
+
+        _toggleGroup.SetActive(bValue);
+        _saveMapToggle.gameObject.SetActive(bValue);
     }
 }
