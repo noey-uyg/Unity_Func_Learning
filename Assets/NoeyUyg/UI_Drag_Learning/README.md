@@ -13,15 +13,18 @@ Resolution : 1920 X 1080
 > ![Image](https://github.com/user-attachments/assets/40847cab-7597-44a8-919c-b579dabcedc6)
 
 # Description
-> 드래그 중인 UI는 가장 위로 올라오게 함.
-
-> 요소가 올라갈 창은 클릭해도 UI가 움직이지 않고, 창이 가장 맨 위로 올라오기만 함. 
-
-> 윗 부분의 UI를 움직일 수 있는 부분으로만 UI가 움직일 수 있음
+> 드래그 중인 UI는 가장 위로 올라오게 함. <br/>
+> 요소가 올라갈 창은 클릭해도 UI가 움직이지 않고, 창이 가장 맨 위로 올라오기만 함. <br/>
+> 윗 부분의 UI를 움직일 수 있는 부분으로만 UI가 움직일 수 있음. <br/>
 
 
-> The UI being dragged moves to the top.
+> The UI being dragged moves to the top. <br/>
+> Even if you click on the window where the element will be raised, the UI does not move, and the window only rises to the top. <br/> 
+> The UI can only be moved to the part where the upper UI can be moved. <br/>
 
-> Even if you click on the window where the element will be raised, the UI does not move, and the window only rises to the top. 
-
-> The UI can only be moved to the part where the upper UI can be moved.
+# Source
+> [PathFinding_Source](https://github.com/noey-uyg/Unity_Func_Learning/tree/master/Assets/NoeyUyg/PathFinding) <br/>
+> [Move_Source](https://github.com/noey-uyg/Unity_Func_Learning/tree/master/Assets/NoeyUyg/Move_Learning) <br/>
+> [Inventory_Source](https://github.com/noey-uyg/Unity_Func_Learning/tree/master/Assets/NoeyUyg/Inventory_Learning) <br/>
+> [Command_Source](https://github.com/noey-uyg/Unity_Func_Learning/tree/master/Assets/NoeyUyg/DesignPattern/Command) <br/>
+> [Factory_Source](https://github.com/noey-uyg/Unity_Func_Learning/tree/master/Assets/NoeyUyg/DesignPattern/Factory) <br/>

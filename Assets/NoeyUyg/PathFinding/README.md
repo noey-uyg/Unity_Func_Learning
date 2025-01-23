@@ -16,11 +16,16 @@ Resolution : 1920 X 1080
 > ![Image](https://github.com/user-attachments/assets/cb732f94-256d-4bf2-be85-96e7996b8d5f)
 
 # Description
-> 캔버스에 원하는 크기의 그리드를 만들고 BFS 또는 Astar를 이용해 길을 찾음.
+> 캔버스에 원하는 크기의 그리드를 만들고 BFS 또는 Astar를 이용해 길을 찾음. <br/>
+> BFS나 Astar를 골라서 길찾기를 시작할 수 있으며 원하는 맵을 저장하여 서로 비교할 수 있음. <br/>
 
-> BFS나 Astar를 골라서 길찾기를 시작할 수 있으며 원하는 맵을 저장하여 서로 비교할 수 있음.
 
+> Create a grid of the desired size on the canvas and find your way using BFS or Astar. <br/>
+> You can select BFS or Astar to start navigation, and save the maps you want to compare them. <br/>
 
-> Create a grid of the desired size on the canvas and find your way using BFS or Astar.
-
-> You can select BFS or Astar to start navigation, and save the maps you want to compare them.
+# Source
+> [UI_Drag_Source](https://github.com/noey-uyg/Unity_Func_Learning/tree/master/Assets/NoeyUyg/UI_Drag_Learning)<br/>
+> [Move_Source](https://github.com/noey-uyg/Unity_Func_Learning/tree/master/Assets/NoeyUyg/Move_Learning) <br/>
+> [Inventory_Source](https://github.com/noey-uyg/Unity_Func_Learning/tree/master/Assets/NoeyUyg/Inventory_Learning) <br/>
+> [Command_Source](https://github.com/noey-uyg/Unity_Func_Learning/tree/master/Assets/NoeyUyg/DesignPattern/Command) <br/>
+> [Factory_Source](https://github.com/noey-uyg/Unity_Func_Learning/tree/master/Assets/NoeyUyg/DesignPattern/Factory) <br/>
