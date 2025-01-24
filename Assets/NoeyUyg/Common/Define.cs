@@ -158,3 +158,40 @@ public enum Command_Action
 #endregion
 
 #endregion
+
+#region Minesweeper
+
+public enum MinesweeperDifficultyLevel
+{
+    Beginner,
+    Intermediate,
+    Advanced,
+
+    LastInstance
+}
+
+public enum MinesweeperTileType
+{
+    None,
+    Mine,
+
+    LastInstance
+}
+
+public enum MinesweeperTileOpenType
+{
+    Open,
+    Close,
+
+    LastInstance
+}
+
+public enum MinesweeperTileLightType
+{
+    Light,
+    Dark,
+
+    LastInstance
+}
+
+#endregion
