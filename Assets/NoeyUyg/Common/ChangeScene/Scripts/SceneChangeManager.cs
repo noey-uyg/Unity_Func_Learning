@@ -18,6 +18,7 @@ public class SceneChangeManager : MonoBehaviour
             button.transform.SetParent(_buttonsParent);
             button.transform.localScale = Vector3.one;
             button.transform.localPosition = Vector3.zero;
+            button.Init();
             button.AddOnClickListener(ChangeScene);
         }
     }
