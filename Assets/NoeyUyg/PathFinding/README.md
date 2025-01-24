@@ -4,7 +4,6 @@ Editor Veirsion : 2021.3.16f1
 Resolution : 1920 X 1080
 
 - 유니티의 전반적인 기술을 익히고, 디자인 패턴과 다양한 기술을 실험하고 연습하고 공부하는 공간
-- A space to learn Unity's overall technology and to experiment, practice, and study design patterns and various technologies.
 
 # PathFinding
 > https://github.com/noey-uyg/Unity_Func_Learning/tree/master/Assets/NoeyUyg/PathFinding
@@ -19,9 +18,6 @@ Resolution : 1920 X 1080
 > 캔버스에 원하는 크기의 그리드를 만들고 BFS 또는 Astar를 이용해 길을 찾음. <br/>
 > BFS나 Astar를 골라서 길찾기를 시작할 수 있으며 원하는 맵을 저장하여 서로 비교할 수 있음. <br/>
 
-
-> Create a grid of the desired size on the canvas and find your way using BFS or Astar. <br/>
-> You can select BFS or Astar to start navigation, and save the maps you want to compare them. <br/>
 
 # Source
 > [UI_Drag_Source](https://github.com/noey-uyg/Unity_Func_Learning/tree/master/Assets/NoeyUyg/UI_Drag_Learning)<br/>

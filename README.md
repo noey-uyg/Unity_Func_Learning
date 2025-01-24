@@ -4,7 +4,6 @@ Editor Veirsion : 2021.3.16f1
 Resolution : 1920 X 1080
 
 - 유니티의 전반적인 기술을 익히고, 디자인 패턴과 다양한 기술을 실험하고 연습하고 공부하는 공간
-- A space to learn Unity's overall technology and to experiment, practice, and study design patterns and various technologies.
 
 # Index
 [1. UI_Drag](#UI_Drag)
