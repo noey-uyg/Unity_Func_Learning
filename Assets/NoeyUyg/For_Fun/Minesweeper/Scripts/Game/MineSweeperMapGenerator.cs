@@ -103,7 +103,7 @@ public class MineSweeperMapGenerator : Singleton<MineSweeperMapGenerator>
         foreach(var v in _tiles)
         {
             if (v.Value.IsOpen())
-                continue;
+                continue;                
 
             if(v.Value.GetTileType() == MinesweeperTileType.Mine)
                 v.Value.SetColor(Color.magenta);

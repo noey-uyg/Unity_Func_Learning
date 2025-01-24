@@ -4,6 +4,23 @@ using UnityEngine;
 
 public abstract class Define {}
 
+#region ChangeScene
+
+public enum SceneName
+{
+    Home,
+    Command,
+    Factory,
+    Minesweeper,
+    Inventory,
+    Move,
+    PathFinding,
+    UILearningScene,
+
+    LastInstance
+}
+
+#endregion
 
 #region BFS_PathFinding
 public class RectSize

@@ -6,6 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/NoeyUyg/Common/ChangeScene/Scene/Home.unity
+    guid: fb829be49443f3c4ebd63d56314e2946
+  - enabled: 1
+    path: Assets/NoeyUyg/DesignPattern/Command/Scene/Command.unity
+    guid: 1ab30932a59bc5e4494407604793707c
+  - enabled: 1
+    path: Assets/NoeyUyg/DesignPattern/Factory/Scene/Factory.unity
+    guid: 98237a39541592a4da81a45e5ff2fa6c
+  - enabled: 1
+    path: Assets/NoeyUyg/For_Fun/Minesweeper/Scene/Minesweeper.unity
+    guid: 7143da44061308d4a9e00f81ef5d9289
+  - enabled: 1
+    path: Assets/NoeyUyg/Inventory_Learning/Scene/Inventory.unity
+    guid: 156bb84d795dc84488e6ccbc8811dbca
+  - enabled: 1
+    path: Assets/NoeyUyg/Move_Learning/Scene/Move.unity
+    guid: 8df738c141ae72c45be6cd2756863f31
+  - enabled: 1
     path: Assets/NoeyUyg/PathFinding/Scene/PathFinding.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/NoeyUyg/UI_Drag_Learning/Scene/UILearningScene.unity
+    guid: 9d3f308cdf85baa44a30d40779245aa0
   m_configObjects: {}
