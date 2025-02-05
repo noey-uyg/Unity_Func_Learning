@@ -16,6 +16,7 @@ public enum SceneName
     Move,
     PathFinding,
     UILearningScene,
+    MapGenerator,
 
     LastInstance
 }
