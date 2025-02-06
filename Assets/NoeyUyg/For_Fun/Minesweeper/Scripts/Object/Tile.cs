@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+public class MinesweeperTile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private Color _closeLight;
@@ -131,7 +131,7 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
                 if (IsWithinBounds(adjacentX, adjacentY))
                 {
-                    Tile adjacentTile = MineSweeperMapGenerator.Instance.GetTile(new Vector2(adjacentX, adjacentY));
+                    MinesweeperTile adjacentTile = MineSweeperMapGenerator.Instance.GetTile(new Vector2(adjacentX, adjacentY));
                     if (adjacentTile != null && !adjacentTile.IsOpen())
                     {
                         adjacentTile.OnPointerDown(new PointerEventData(EventSystem.current) { button = PointerEventData.InputButton.Left });

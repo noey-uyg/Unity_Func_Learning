@@ -3,40 +3,40 @@ using UnityEngine.Pool;
 
 public class TilePool : Singleton<TilePool>
 {
-    [SerializeField] private Tile _tilePrefab;
-    private ObjectPool<Tile> _tilePool;
+    [SerializeField] private MinesweeperTile _tilePrefab;
+    private ObjectPool<MinesweeperTile> _tilePool;
 
     private const int maxSize = 10000;
     private const int initSize = 100;
 
     protected override void OnAwake()
     {
-        _tilePool = new ObjectPool<Tile>(CreateTile, ActivateTile, DisableTile, DestroyTile, false, initSize, maxSize);
+        _tilePool = new ObjectPool<MinesweeperTile>(CreateTile, ActivateTile, DisableTile, DestroyTile, false, initSize, maxSize);
     }
 
-    private Tile CreateTile()
+    private MinesweeperTile CreateTile()
     {
         return Instantiate(_tilePrefab);
     }
 
-    private void ActivateTile(Tile raw)
+    private void ActivateTile(MinesweeperTile raw)
     {
         raw.gameObject.SetActive(true);
     }
 
-    private void DisableTile(Tile raw)
+    private void DisableTile(MinesweeperTile raw)
     {
         raw.gameObject.SetActive(false);
     }
 
-    private void DestroyTile(Tile raw)
+    private void DestroyTile(MinesweeperTile raw)
     {
         Destroy(raw);
     }
 
-    public Tile GetTile()
+    public MinesweeperTile GetTile()
     {
-        Tile raw = null;
+        MinesweeperTile raw = null;
         if (_tilePool.CountActive >= maxSize)
         {
             raw = CreateTile();
@@ -49,7 +49,7 @@ public class TilePool : Singleton<TilePool>
         return raw;
     }
 
-    public void ReleaseTile(Tile raw)
+    public void ReleaseTile(MinesweeperTile raw)
     {
         _tilePool.Release(raw);
     }

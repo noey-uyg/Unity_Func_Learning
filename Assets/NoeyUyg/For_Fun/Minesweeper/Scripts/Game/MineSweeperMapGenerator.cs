@@ -5,8 +5,8 @@ using UnityEngine;
 public class MineSweeperMapGenerator : Singleton<MineSweeperMapGenerator>
 {
     [SerializeField] private RectTransform _map;
-    private Dictionary<Vector2, Tile> _tiles = new Dictionary<Vector2, Tile>();
-    private List<Tile> _mineTiles = new List<Tile>();
+    private Dictionary<Vector2, MinesweeperTile> _tiles = new Dictionary<Vector2, MinesweeperTile>();
+    private List<MinesweeperTile> _mineTiles = new List<MinesweeperTile>();
 
     private void Start()
     {
@@ -28,7 +28,7 @@ public class MineSweeperMapGenerator : Singleton<MineSweeperMapGenerator>
             for (int j = 0; j < MineSweeperGameManager.Instance.BoardSizeY; j++)
             {
                 // 자리 잡기
-                Tile square = TilePool.Instance.GetTile();
+                MinesweeperTile square = TilePool.Instance.GetTile();
                 square.Init();
                 square.SetRectSize(squareWidth, squareHeight);
                 square.transform.SetParent(_map);
@@ -84,7 +84,7 @@ public class MineSweeperMapGenerator : Singleton<MineSweeperMapGenerator>
         _mineTiles.Clear();
     }
 
-    public Tile GetTile(Vector2 pos)
+    public MinesweeperTile GetTile(Vector2 pos)
     {
         return _tiles[pos];
     }
