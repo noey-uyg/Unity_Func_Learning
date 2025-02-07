@@ -49,6 +49,7 @@ public class MineSweeperGameManager : Singleton<MineSweeperGameManager>
         SetGameStart(false);
         GameSetting();
         MineSweeperMapGenerator.Instance.MapGenerate();
+        TopUIManager.Instance.ChangeMineText();
     }
 
     public void UpdateLevelValue(int value)
