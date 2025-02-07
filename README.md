@@ -20,6 +20,12 @@ Resolution : 1920 X 1080
 
 [5-2 Factory](#Factory)
 
+[6. For_Fun](#For_Fun)
+
+[6-1 MineSweeper](#MineSweeper)
+
+[7. MapGenerator](#MapGenerator)
+
 
 
 # UI_Drag
@@ -111,6 +117,38 @@ Resolution : 1920 X 1080
   <summary> Video</summary> 
   
 >> ![Image](https://github.com/user-attachments/assets/13b38184-ae40-4921-835f-ce017196f89a)
+
+</details>
+
+<div align="right">
+  
+[Index](#Index)
+
+</div>
+
+# For_Fun
+> ## MineSweeper
+> > [MineSweeper_Source](https://github.com/noey-uyg/Unity_Func_Learning/tree/master/Assets/NoeyUyg/For_Fun)
+<details>
+  <summary> Video</summary> 
+  
+>> ![Image](https://github.com/user-attachments/assets/8b160413-5b55-49d3-b66e-c3c0b1345ff7)
+
+</details>
+
+<div align="right">
+  
+[Index](#Index)
+
+</div>
+
+# MapGenerator
+> [MapGenerator_Source](https://github.com/noey-uyg/Unity_Func_Learning/tree/master/Assets/NoeyUyg/MapGenerator)
+> 
+<details>
+  <summary> Video</summary> 
+  
+> ![Image](https://github.com/user-attachments/assets/aca3d1a0-9125-476b-9455-742c7a02b733)
 
 </details>
 
