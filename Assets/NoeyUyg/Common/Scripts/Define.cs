@@ -213,3 +213,14 @@ public enum MinesweeperTileLightType
 }
 
 #endregion
+
+#region MapGenerator
+
+public enum MapGeneratorType
+{
+    CellularAutomata,
+    BSP,
+
+    LastInstance
+}
+#endregion

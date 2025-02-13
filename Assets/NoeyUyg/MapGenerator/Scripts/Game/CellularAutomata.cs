@@ -7,72 +7,27 @@ using UnityEngine.Tilemaps;
 /// 참고 https://blog.naver.com/dkdlelrktlfj/222252867893
 /// </summary>
 
-public class CellularAutomata : MonoBehaviour
+public class CellularAutomata : MapGenerators
 {
-    [Header("Camera")]
-    [SerializeField] private Camera _camera;
-    [Header("Map Generator")]
-    [Range(20,150)]
-    [SerializeField] private int _mapWidth;
-    [Range(20, 150)]
-    [SerializeField] private int _mapHeight;
-    [Range(0,100)]
-    [SerializeField] private int _cellDenseRatio; // 셀 조밀도
-    [Range(0,8)]
-    [SerializeField] private int _wallCount; // 주변에 벽이 n개 이상일 때 벽으로 만들기 위함
-    [SerializeField] private int _refreshCount; // 맵 재구성 횟수
-    [SerializeField] private string seed;
-    [SerializeField] private Transform _tileParent;
-    [SerializeField] private float _tileSize;
+    private int _cellDenseRatio; // 셀 조밀도
+    private int _wallCount; // 주변에 벽이 n개 이상일 때 벽으로 만들기 위함
+    private string _seed;
 
-    [Header("Tile")]
-    [SerializeField] private Tilemap _tilemap;
-    [SerializeField] private RuleTile _wallTile;
-    [SerializeField] private RuleTile _roadTile;
-
-    private bool[,] _tileGrid;
-    private MapGeneratorTile[,] _tiles;
-
-    private bool _isMapGenerating;
-    private void Update()
+    public void Setting(int cellDenseRatio, int wallCount, string seed = "")
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !_isMapGenerating)
-        {
-            GenerateMap();
-        }   
+        _cellDenseRatio = cellDenseRatio;
+        _wallCount = wallCount;
+        _seed = seed;
     }
 
     /// <summary>
     /// 맵 생성 시작
     /// </summary>
-    public void GenerateMap()
+    public override void GenerateMap()
     {
-        //ClearTiles();
-        CameraSetting();
-        ClearTileMap();
-        GenerateGrid();
+        base.GenerateMap();
 
         StartCoroutine(IERefreshMap());
-    }
-
-    /// <summary>
-    /// 카메라 줌 조절
-    /// </summary>
-    private void CameraSetting()
-    {
-        //해상도
-        float screenWidth = Screen.width;
-        float screenHeight = Screen.height;
-
-        //비율
-        float aspectRatio = screenWidth / screenHeight;
-
-        // 가로와 세로 사이즈 중 더 큰 값을 카메라 값으로
-        float widthSize = _mapWidth / (2 * aspectRatio);
-        float heightSize = _mapHeight / 2.0f;
-        float orthographicSize = widthSize > heightSize ? widthSize : heightSize;
-        
-        _camera.orthographicSize = orthographicSize;
     }
 
     /// <summary>
@@ -80,28 +35,26 @@ public class CellularAutomata : MonoBehaviour
     /// </summary>
     IEnumerator IERefreshMap()
     {
-        _isMapGenerating = true;
-        WaitForSeconds waitForSeconds = new WaitForSeconds(1f);
-
         for(int i = 0; i < _refreshCount; i++)
         {
-            yield return waitForSeconds;
+            yield return _defaultCoroutineForSeconds;
             RefreshMap();
         }
 
         _isMapGenerating = false;
+        _finishAction?.Invoke();
     }
 
     /// <summary>
     /// 초기 맵 정의
     /// </summary>
-    private void GenerateGrid()
+    protected override void GenerateGrid()
     {
         _tileGrid = new bool[_mapWidth, _mapHeight];
 
-        System.Random pseudoRandomSeed = string.IsNullOrEmpty(seed)
+        System.Random pseudoRandomSeed = string.IsNullOrEmpty(_seed)
             ? new System.Random(System.DateTime.Now.Ticks.GetHashCode())
-            : new System.Random(seed.GetHashCode());
+            : new System.Random(_seed.GetHashCode());
 
 
         for(int x = 0; x < _mapWidth; x++)
@@ -117,8 +70,6 @@ public class CellularAutomata : MonoBehaviour
                     _tileGrid[x, y] = (pseudoRandomSeed.Next(0, 100) < _cellDenseRatio) ? false : true;
                 }
                 SetTile(x, y);
-                //CreateTile(x,y);
-                // -> 오브젝트 생성 방식
             }
         }
     }
@@ -143,8 +94,6 @@ public class CellularAutomata : MonoBehaviour
                     _tileGrid[x, y] = true;
                 }
                 SetTile(x, y);
-                // _tiles[x, y].SetColor(_tileGrid[x,y] ? Color.black : Color.white);
-                // -> 오브젝트 생성 방식
             }
         }
     }
@@ -180,53 +129,6 @@ public class CellularAutomata : MonoBehaviour
         }
 
         return count;
-    }
-
-    /// <summary>
-    /// 타일 초기화
-    /// </summary>
-    private void ClearTiles()
-    {
-        if(_tiles != null)
-        {
-            for (int x = 0; x < _tiles.GetLength(0); x++)
-            {
-                for (int y = 0; y < _tiles.GetLength(1); y++)
-                {
-                    MapGeneratorTilePool.Instance.ReleaseMapGeneratorTile(_tiles[x, y]);
-                }
-            }
-        }
-
-        _tiles = new MapGeneratorTile[_mapWidth, _mapHeight];
-    }
-
-    /// <summary>
-    /// 타일 초기화
-    /// </summary>
-    private void ClearTileMap()
-    {
-        _tilemap.ClearAllTiles(); // 타일맵의 모든 타일 제거
-    }
-
-
-    /// <summary>
-    /// 타일 생성
-    /// </summary>
-    private void CreateTile(int x, int y)
-    {
-        int halfWidth = -_mapWidth / 2;
-        int halfHeight = -_mapHeight / 2;
-        Color color = _tileGrid[x, y] ? Color.white : Color.black;
-
-        var tile = MapGeneratorTilePool.Instance.GetMapGeneratorTile();
-
-        tile.SetColor(color);
-        tile.SetSize(_tileSize, _tileSize);
-        tile.transform.SetParent(_tileParent);
-        tile.transform.position = new Vector2((halfWidth + x) * _tileSize, (halfHeight + y) * _tileSize);
-
-        _tiles[x,y] = tile;
     }
 
     /// <summary>
