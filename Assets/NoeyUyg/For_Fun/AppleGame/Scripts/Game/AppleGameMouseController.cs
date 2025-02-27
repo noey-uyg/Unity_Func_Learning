@@ -22,7 +22,14 @@ public class AppleGameMouseController : Singleton<AppleGameMouseController>
     private void Update()
     {
         if (!AppleGameManager.Instance.IsGameStart)
+        {
+            if(_selectSquares.Count > 0)
+            {
+                _selectSquares.Clear();
+            }
             return;
+        }
+            
 
         if (Input.GetMouseButtonDown(0))
         {
