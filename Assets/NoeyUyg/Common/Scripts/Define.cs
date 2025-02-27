@@ -17,6 +17,7 @@ public enum SceneName
     PathFinding,
     UILearningScene,
     MapGenerator,
+    AppleGame,
 
     LastInstance
 }

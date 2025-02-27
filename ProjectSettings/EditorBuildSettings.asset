@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/NoeyUyg/MapGenerator/Scene/MapGenerator.unity
     guid: aea39b0a650a4c043aee986637981b4b
+  - enabled: 1
+    path: Assets/NoeyUyg/For_Fun/AppleGame/Scene/AppleGame.unity
+    guid: 235f7077992f9b148a76e021bd0d7368
   m_configObjects: {}
