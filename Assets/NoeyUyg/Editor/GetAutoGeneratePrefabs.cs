@@ -62,22 +62,14 @@ public class CreatePrefab
         string extName = extFront + extBack;
         DirectoryInfo dir = new DirectoryInfo(path);
 
-        foreach (var v in dir.GetDirectories())
+        foreach (var v in dir.GetFiles(extName, SearchOption.AllDirectories))
         {
-            FileInfo[] info = v.GetFiles(extName, SearchOption.AllDirectories);
+            string fileName = Path.GetFileNameWithoutExtension(v.Name);
+            string removeMenuName = fileName + extBack;
+            string menuName = v.FullName.Replace("\\", "/").Replace(path, "").Replace(removeMenuName, "");
 
-            sb.AppendLine($@"   #region {v.Name}_Create");
-            for (int i = 0; i < info.Length; i++)
-            {
-                string fileName = Path.GetFileNameWithoutExtension(info[i].Name);
-                string removeMenuName = fileName + extBack;
-                string menuName = info[i].FullName.Replace("\\","/").Replace(path, "").Replace(removeMenuName,"");
-
-                sb.AppendLine($@"   [MenuItem(""GameObject/Prefabs{menuName}{fileName}"",false, 1)]");
-                sb.AppendLine($@"   public static void Create{fileName.Replace(" ", "_")}() => CreatePrefabs(""{fileName}"");");
-            }
-            sb.AppendLine($@"   #endregion");
-            sb.AppendLine();
+            sb.AppendLine($@"   [MenuItem(""GameObject/Prefabs{menuName}{fileName}"",false, 1)]");
+            sb.AppendLine($@"   public static void Create{fileName.Replace(" ", "_")}() => CreatePrefabs(""{fileName}"");");
         }
 
         return sb.ToString();
